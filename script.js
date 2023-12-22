@@ -8,6 +8,7 @@ function guessNumber (myNumber) {
         
         if (askNumber === null){
             alert('Игра окончена');
+            return 0;
         }
         if (askNumber > myNumber) {
             alert('Загаданное число меньше');
