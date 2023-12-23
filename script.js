@@ -39,7 +39,7 @@ function guessNumber (myNumber, tryCount) {
             questionsAboutNumber();
         }
 
-        if (askNumber === myNumber){
+        if (askNumber !== myNumber){
             if(confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?')){
                 guessNumber(12,3);
             }
