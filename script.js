@@ -1,52 +1,59 @@
+const ATTEMPTS_COUNT = 10;
+
+const getRandomNum = (min = 0, max = 100) => {
+    return Math.ceil(Math.random() * max) + min
+}
+
 const isNumber = (num) => {
     return !isNaN(parseFloat(num)) && isFinite(num);
 }
 
-function guessNumber (myNumber, tryCount) {
+const guessNumber = (myNumber, tryCount) => {
+    function questionsAboutNumber() {
+        let askNumber = prompt('Угадай число от 1 до 100');
+        let countMessage;
 
-    function questionsAboutNumber () {
-        const count = ' осталось ' + tryCount + ' попыток';
-        const askNumber = prompt ('Угадай число от 1 до 100');
-
-        if (tryCount >= 0){
-            tryCount--
-        }
-
-        if(tryCount === -1){
-            if(confirm('попытки закончились, хотите сыграть еще?')){
-                guessNumber(10,3);
-            }
+        if (askNumber === null) {
+            alert('Игра окончена');
             return;
         }
 
-        if (askNumber === null){
-            alert('Игра окончена' );
-            return 0;
+        if (!isNumber(askNumber)) {
+            alert('Введи число!');
+            questionsAboutNumber();
+        } else {
+            askNumber = +askNumber
+        }
+
+        tryCount--;
+        countMessage = ' осталось ' + tryCount + ' попыток';;
+
+        if (askNumber === myNumber) {
+            if (confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?')) {
+                guessNumber(getRandomNum(0, 100), ATTEMPTS_COUNT);
+            }
+            alert('Игра окончена');
+            return;
+        }
+
+        if (tryCount === 0) {
+            if (confirm('попытки закончились, хотите сыграть еще?')) {
+                guessNumber(getRandomNum(0, 100), ATTEMPTS_COUNT);
+            }
+
+            alert('Игра окончена');
+            return;
         }
 
         if (askNumber > myNumber) {
-            alert('Загаданное число меньше ' + count);
+            alert('Загаданное число меньше ' + countMessage);
+            questionsAboutNumber();
+        } else {
+            alert('Загаданное число больше ' + countMessage);
             questionsAboutNumber();
         }
-
-        if (askNumber < myNumber){
-            alert('Загаданное число больше ' + count);
-            questionsAboutNumber();
-        }
-
-        if (!isNumber(askNumber)){
-            alert('Введи число! ' + count);
-            questionsAboutNumber();
-        }
-
-        if (askNumber !== myNumber){
-            if(confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?')){
-                guessNumber(12,3);
-            }
-            return;
-        }
-        
-    }   
+    }
     questionsAboutNumber()
 }
-guessNumber(15, 3);
+
+guessNumber(getRandomNum(0, 100), ATTEMPTS_COUNT);
