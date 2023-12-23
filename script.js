@@ -22,7 +22,7 @@ function guessNumber (myNumber) {
             alert('Введи число!');
             questionsAboutNumber();
         }
-        if (askNumber === myNumber){
+        if (askNumber !== myNumber){
             confirm('Поздравляю, Вы угадали!!!');
         }
         
