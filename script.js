@@ -1,4 +1,4 @@
-const ATTEMPTS_COUNT = 10;
+const countTry = 10;
 
 const getRandomNum = (min = 0, max = 100) => {
     return Math.ceil(Math.random() * max) + min
@@ -30,7 +30,7 @@ const guessNumber = (myNumber, tryCount) => {
 
         if (askNumber === myNumber) {
             if (confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?')) {
-                guessNumber(getRandomNum(0, 100), ATTEMPTS_COUNT);
+                guessNumber(getRandomNum(0, 100), countTry);
             }
             alert('Игра окончена');
             return;
@@ -38,7 +38,7 @@ const guessNumber = (myNumber, tryCount) => {
 
         if (tryCount === 0) {
             if (confirm('попытки закончились, хотите сыграть еще?')) {
-                guessNumber(getRandomNum(0, 100), ATTEMPTS_COUNT);
+                guessNumber(getRandomNum(0, 100), countTry);
             }
 
             alert('Игра окончена');
@@ -56,4 +56,4 @@ const guessNumber = (myNumber, tryCount) => {
     questionsAboutNumber()
 }
 
-guessNumber(getRandomNum(0, 100), ATTEMPTS_COUNT);
+guessNumber(getRandomNum(0, 100), countTry);
